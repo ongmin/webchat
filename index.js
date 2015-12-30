@@ -6,26 +6,25 @@ var app = express()
 var server = http.Server(app)
 var io = socketIo(server)
 
-// var express = require('express')
-// var app = express()
-// var http = require('http').Server(app)
-// var io = require('socket.io')(http)
-
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html')
 })
 
-io.on('connection', function (socket) {
+app.use(express.static('public'))
+
+io.on('connection', (socket) => {
   console.log('a user connected')
-  socket.on('chat message', function (msg) {
+  socket.on('chat message', (msg) => {
     console.log('message: ' + msg)
     io.emit('chat message', msg)
   })
-  socket.on('disconnect', function () {
+  socket.on('disconnect', () => {
     console.log('user disconnected')
   })
 })
 
-server.listen(3000, function () {
-  console.log('listening on *:3000')
-})
+// server.listen(3000, () => {
+//   console.log('listening on *:3000')
+// })
+
+export default app

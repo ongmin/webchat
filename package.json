@@ -4,10 +4,11 @@
   "description": "exercise building webchat with socket.io",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build-js && npm run build-html && npm run server",
-    "server": "nodemon dist/index.js",
-    "build-js": "babel index.js -d dist",
-    "build-html": "cp -r index.html dist/index.html",
+    "start": "npm run build-js && npm run build-html && npm run build-server && npm run server",
+    "server": "nodemon public/server.js",
+    "build-js": "babel index.js -d public",
+    "build-server": "babel server.js -d public",
+    "build-html": "cp -r index.html public/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

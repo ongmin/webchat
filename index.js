@@ -3,19 +3,24 @@ const PORT = process.env.PORT || 8080
 import express from 'express'
 import http from 'http'
 import socketIo from 'socket.io'
+import path from 'path'
 
 var app = express()
 var server = http.Server(app)
 var io = socketIo(server)
 
+
 server.listen(PORT, function () {
   console.log('listening on PORT:' + PORT)
 })
 
-app.use(express.static(__dirname + '/public'))
+console.log(__dirname)
+console.log('__dirname')
+
+app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html')
+  res.sendFile(path.resolve(__dirname + '/public/'))
 })
 
 var numUsers = 0

@@ -12,6 +12,10 @@ var _socket = require('socket.io');
 
 var _socket2 = _interopRequireDefault(_socket);
 
+var _path = require('path');
+
+var _path2 = _interopRequireDefault(_path);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var PORT = process.env.PORT || 8080;
@@ -24,10 +28,13 @@ server.listen(PORT, function () {
   console.log('listening on PORT:' + PORT);
 });
 
-// app.use(express.static(__dirname + '/public'))
+console.log(__dirname);
+console.log('__dirname');
+
+app.use('/', _express2.default.static(_path2.default.join(__dirname, 'public')));
 
 app.get('/', function (req, res) {
-  res.sendFile('../index.html');
+  res.sendFile(_path2.default.resolve(__dirname + '/public/'));
 });
 
 var numUsers = 0;

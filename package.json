@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build-js && npm run build-main && npm run build-html && npm run server",
-    "server": "nodemon app/index.js",
-    "build-js": "babel index.js -d app",
+    "server": "nodemon index.dist.js",
+    "build-js": "babel index.js -o index.dist.js",
     "build-main": "babel main.js -d public",
     "build-html": "cp -r index.html public/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"

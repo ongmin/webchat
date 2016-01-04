@@ -2,17 +2,34 @@
 <html>
   <head>
     <title>Socket.IO chat</title>
-    <link rel="stylesheet" href="/public/style.css">
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <ul id="messages"></ul>
+
+    <ul class="pages">
+    <li class="chat page">
+      <div class="chatArea">
+        <ul class="messages"></ul>
+      </div>
+      <input class="inputMessage" placeholder="Type here..."/>
+    </li>
+    <li class="login page">
+      <div class="form">
+        <h3 class="title">What's your nickname?</h3>
+        <input class="usernameInput" type="text" maxlength="14" />
+      </div>
+    </li>
+  </ul>
+
+
+    <!-- <ul id="messages"></ul>
     <form action="">
       <input class="inputMessage" id="m" autocomplete="off" /><button>Send</button>
-    </form>
+    </form> -->
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-    <script src="/public/main.js"></script>
+    <script src="main.js"></script>
 
 
   </body>

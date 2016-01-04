@@ -9,21 +9,22 @@ var app = express()
 var server = http.Server(app)
 var io = socketIo(server)
 
-
-server.listen(PORT, function () {
-  console.log('listening on PORT:' + PORT)
-})
-
 console.log(__dirname)
-console.log('__dirname')
 
-app.use('/', express.static(path.join(__dirname, 'public')))
+app.use(express.static('public'))
 
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname + '/public/'))
 })
 
 var numUsers = 0
+
+io.on('connection', function (socket) {
+  socket.on('chat message', function (msg) {
+    io.emit('chat message', msg)
+  })
+})
+
 
 io.on('connection', (socket) => {
   var addedUser = false
@@ -80,4 +81,8 @@ io.on('connection', (socket) => {
       })
     }
   })
+})
+
+server.listen(PORT, function () {
+  console.log('listening on PORT:' + PORT)
 })

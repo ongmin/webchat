@@ -24,20 +24,21 @@ var app = (0, _express2.default)();
 var server = _http2.default.Server(app);
 var io = (0, _socket2.default)(server);
 
-server.listen(PORT, function () {
-  console.log('listening on PORT:' + PORT);
-});
-
 console.log(__dirname);
-console.log('__dirname');
 
-app.use('/', _express2.default.static(_path2.default.join(__dirname, 'public')));
+app.use(_express2.default.static('public'));
 
 app.get('/', function (req, res) {
   res.sendFile(_path2.default.resolve(__dirname + '/public/'));
 });
 
 var numUsers = 0;
+
+io.on('connection', function (socket) {
+  socket.on('chat message', function (msg) {
+    io.emit('chat message', msg);
+  });
+});
 
 io.on('connection', function (socket) {
   var addedUser = false;
@@ -94,4 +95,8 @@ io.on('connection', function (socket) {
       });
     }
   });
+});
+
+server.listen(PORT, function () {
+  console.log('listening on PORT:' + PORT);
 });
